@@ -1,0 +1,47 @@
+Classes
+
+Map
+
+X and Os
+
+Player
+
+MVC
+
+
+Roadmap
+
+1. Create Map
+2. X and Os
+3. Player
+4. Graphic
+5. MVC 
+
+
+
+1. Create Map
+    * An 2D matrix of X and Os and something that represents empty spots
+    * Set X and Os, if empty
+    * Check if there are 3 lines of either X or Os
+        * Horizontal 3 cases
+        * Vertical 3 cases
+        * Diagonal 2 cases
+        
+            [0][0] [0][1] [0][2]
+            [1][0] [1][1] [1][2]
+            [2][0] [2][1] [2][2]
+
+2. X and Os 
+    * X and Y value
+
+3. Player
+    * Has either X or O as attribute
+    * Turn
+    * Name
+    * 
+
+4. Graphic
+    * 
+
+5. MVC
+
