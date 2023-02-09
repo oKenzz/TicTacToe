@@ -16,11 +16,25 @@ public class Board extends JPanel{
     
     public Board(){
         // setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.RED);
+        setBackground(Color.WHITE);
         setBounds(180, 80, WIDTH, HEIGHT);
     }
 
-  
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(10));
+        g2d.setColor(Color.BLACK);
+
+        //Draw vertical line
+        g2d.drawLine(133,0, 133, 400);
+        g2d.drawLine(266,0, 266, 400);
+
+        //Draw horizontal line
+        g2d.drawLine(0, 133, 400, 133);
+        g2d.drawLine(0, 266, 400, 266);
+
+    };
 
 
 

@@ -1,16 +1,20 @@
+package Playarea;
 import pieces.Piece;
+import player.Player;
 
 public class Spot {
     private int x;
     private int y;
     private Piece piece;
     private boolean IsOccupied = false;
+    private Player player;
 
-    public Spot(int x, int y, Piece piece){
+    public Spot(int x, int y, Piece piece, Player player){
         this.x = x;
         this.y = y;
         this.piece = piece;
         this.IsOccupied = true;
+        this.player = player;
     }
   
     public Piece getPiece() {
@@ -19,6 +23,18 @@ public class Spot {
 
     public boolean getIsOccupied() {
         return IsOccupied;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
 
