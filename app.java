@@ -4,7 +4,8 @@ import mvc.Controller;
 public class app {
 
     public static void main(String[] args) {
-        new Controller();
+        Controller c = new Controller();
+        new BoardFrame(c);
     }
 
 

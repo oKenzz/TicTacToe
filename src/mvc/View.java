@@ -9,7 +9,7 @@ public class View {
     BoardFrame frame;
 
     public View(){
-        frame = new BoardFrame();
+        // frame = new BoardFrame();
         
 
     }

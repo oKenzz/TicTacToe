@@ -45,3 +45,40 @@ Roadmap
 
 5. MVC
 
+
+
+RETHINK
+
+X and O should include how they are drawn
+
+Play area for each square create intervalls, so a Piece is drawn on the center
+
+MODEL - manipulates data
+
+Controller calls model methods
+
+View calls Controller when an action occurs
+
+GameLoop
+    Set current Player
+    While it is still current_players turn and No winners
+        repaint()
+        end GameLoop
+
+Change methods
+    view 
+        MouseEvent
+            When pressed get X and Y
+            Should paint a Piece (X or O) on that area
+
+Player
+    Connect a piece and a player, should the attribue be of type piece or string
+    String, if the game will only consist of X and O
+    Type Piece for further extension
+
+    if type Piece
+    How to create a empty Piece with null coordinates and use exceptionhandling to ignore it
+
+REDO MVC and graphics
+
+WRITE TESTS FOR THE MODEL (i.e playarea, spots, player, pieces)

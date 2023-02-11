@@ -2,17 +2,17 @@ package player;
 import pieces.Piece;
 
 public class Player {
-    private String piece;
+    private Piece piece;
     private String name;
     private boolean turn;
    
-    public Player(String piece, String name){
+    public Player(Piece piece, String name){
         this.piece = piece;
         this.name = name;
         this.turn = false;
     }
 
-    public String getPiece() {
+    public Piece getPiece() {
         return piece;
     }
 

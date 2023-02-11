@@ -4,7 +4,9 @@ import java.util.Map;
 import java.util.Random;
 
 import Playarea.Playarea;
+import pieces.O;
 import pieces.Piece;
+import pieces.X;
 import player.Player;
 
 public class Model {
@@ -14,14 +16,15 @@ public class Model {
 
     private Player[] player_list = new Player[2];
     private Playarea playarea;
+    private int[] coordinates;
     private Random random = new Random();
 
     public Model(){
         this.playarea = new Playarea();
         //Namn input från användare
         //Random piece
-        this.player1 = new Player("X", "BB");
-        this.player2 = new Player("O", "AA");
+        this.player1 = new Player(new X(), "BB");
+        this.player2 = new Player(new O(), "AA");
     
         player_list[0] = player1;
         player_list[1] = player2;
@@ -41,8 +44,11 @@ public class Model {
          }
     }
 
-    public void set_piece(Piece p, int x, int y, Player player){
+    public void set_piece(Piece p, int[] coordinates, Player player){
+        int x = coordinates[0];
+        int y = coordinates[1];
        playarea.set_piece(p, x, y, player);
+       changeturn();
     }
 
 
@@ -56,4 +62,19 @@ public class Model {
         }
         return "No winner";
     }
+
+    public Player[] getPlayer_list() {
+        return player_list;
+    }
+
+    public void setCoordinates(int[] coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public int[] getCoordinates() {
+        return coordinates;
+    }
+
+    
+    
 }
