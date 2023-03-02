@@ -3,30 +3,40 @@ package pieces;
 import javax.swing.JLabel;
 import java.awt.Graphics;
 
-public abstract class Piece extends JLabel{
+public abstract class Piece extends JLabel {
     // private int x;
     // private int y;
     private String pieceSymbol;
 
-     //Chooses square to draw in
-     private Integer offsetX;
-     private Integer offsetY;
+    // Chooses square to draw in
+    private Integer x;
+    private Integer y;
+    private final static int offsetX = 100;
+    private final static int offsetY = 60;
 
-    public Piece(Integer offsetX, Integer offsetY, String pieceSymbol){
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
+    public Piece(Integer x, Integer y, String pieceSymbol) {
+        this.x = x;
+        this.y = y;
         this.pieceSymbol = pieceSymbol;
     }
 
-    public int getOffsetX() {
+    public static int getOffsetx() {
         return offsetX;
     }
 
-    public int getOffsetY() {
+    public static int getOffsety() {
         return offsetY;
     }
 
-    public String getPieceSymbol(){
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public String getPieceSymbol() {
         return pieceSymbol;
     }
 

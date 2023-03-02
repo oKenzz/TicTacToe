@@ -1,4 +1,4 @@
-package Playarea;
+package playarea;
 import pieces.Piece;
 import player.Player;
 
@@ -13,7 +13,7 @@ public class Spot {
         this.x = x;
         this.y = y;
         this.piece = piece;
-        this.IsOccupied = true;
+        this.IsOccupied = true; //Remove instead check null
         this.player = player;
     }
   

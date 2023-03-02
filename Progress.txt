@@ -31,6 +31,12 @@ Roadmap
             [1][0] [1][1] [1][2]
             [2][0] [2][1] [2][2]
 
+            [
+                [X,X,X]
+                [X,X,X]
+                [X,X,X]
+            ]
+
 2. X and Os 
     * X and Y value
 
@@ -82,3 +88,21 @@ Player
 REDO MVC and graphics
 
 WRITE TESTS FOR THE MODEL (i.e playarea, spots, player, pieces)
+
+
+
+
+Check winner algortim(){
+    String winner;
+    Check_horizontal(winner);
+    Check_vertical(winner);
+    Check_diagonal(winner);
+    return winner
+}
+
+
+
+[[x,x,x],
+[x,x,x],
+[x,x,x]]
+

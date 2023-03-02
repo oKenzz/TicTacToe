@@ -16,8 +16,8 @@ public class O extends Piece{
 
     //Chooses square to draw in
 
-    public O(int offsetX, int offsetY){
-        super(offsetX, offsetY, "O");
+    public O(int x, int y){
+        super(x, y, "O");
     }
 
     //This is used to create a representation of what iece a Player is
@@ -28,7 +28,7 @@ public class O extends Piece{
     @Override
     public void paint(Graphics g) throws NullPointerException{ //Does throws signal that this method might throw a NullPointerException
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawArc(CIRCLE_START + getOffsetX(), CIRCLE_END + getOffsetY(), WIDTH, HEIGHT, CIRCLE_ANGLE_START, CIRCLE_ANGLE_END);
+        g2d.drawArc(CIRCLE_START + getX() * getOffsetx(), CIRCLE_END + getY() * getOffsety(), WIDTH, HEIGHT, CIRCLE_ANGLE_START, CIRCLE_ANGLE_END);
 
     }
 

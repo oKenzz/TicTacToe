@@ -8,6 +8,5 @@ public class app {
         new BoardFrame(c);
     }
 
-
-    
+ 
 }

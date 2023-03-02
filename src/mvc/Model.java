@@ -3,10 +3,10 @@ package mvc;
 import java.util.Map;
 import java.util.Random;
 
-import Playarea.Playarea;
 import pieces.O;
 import pieces.Piece;
 import pieces.X;
+import playarea.Playarea;
 import player.Player;
 
 public class Model {
@@ -54,13 +54,14 @@ public class Model {
 
     //Improve algortim
     public String check_winner(){
-        boolean winner = playarea.check_winner();
-        if (winner){
-            for (Player p : player_list){
-                if (p.isTurn()) return p.getName();
-            }
-        }
-        return "No winner";
+        String winner = playarea.check_winner();
+        return winner;
+        // if (winner){
+        //     for (Player p : player_list){
+        //         if (p.isTurn()) return p.getName();
+        //     }
+        // }
+        // return "No winner";
     }
 
     public Player[] getPlayer_list() {
