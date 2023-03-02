@@ -29,8 +29,8 @@ public class Model {
         player_list[0] = player1;
         player_list[1] = player2;
 
-        int i = random.nextInt(0, 2);
-        player_list[i].setTurn(true);
+        // int i = random.nextInt(0, 2);
+        // player_list[i].setTurn(true);
 
     }
 
