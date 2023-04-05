@@ -3,10 +3,15 @@ public class Player {
     
     private boolean turn;
     private String piece;
+    private boolean winner;
+    private String name;
 
-    public Player(){
+
+    public Player(String name){
         this.turn = false;
         this.piece = "";
+        this.winner = false;
+        this.name = name;
     };
   
     public boolean isTurn() {
@@ -24,4 +29,19 @@ public class Player {
     public void setPiece(String piece) {
         this.piece = piece;
     }
+
+    public void setWinner(boolean winner){
+        this.winner = winner;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    
+    
 }

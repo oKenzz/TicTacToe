@@ -1,3 +1,4 @@
+import Logic.Game;
 import graphics.BoardFrame;
 
 public class app {
