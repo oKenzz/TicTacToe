@@ -1,6 +1,7 @@
 TODO:
     GUI
     -mark the winning row
+    -Display info such as player turn, name and piece
 
     AI
     -add bot to play against

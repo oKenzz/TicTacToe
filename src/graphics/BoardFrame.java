@@ -4,21 +4,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import Controller.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class BoardFrame extends JFrame implements ActionListener{
+public class BoardFrame extends JFrame{
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
     private ArrayList<JButton> buttonList = new ArrayList<JButton>();
-    private Controller c = new Controller();
     JLabel winnerLabel = new JLabel();
 
     public BoardFrame(){
@@ -37,7 +34,6 @@ public class BoardFrame extends JFrame implements ActionListener{
         for (int i = 0; i < Math.pow(size,2); i++) {
             JButton button = new JButton();
             buttonList.add(button);   
-            button.addActionListener(this);
             button.setFocusPainted(false);
             button.setBackground(Color.WHITE);
             add(button);
@@ -66,52 +62,39 @@ public class BoardFrame extends JFrame implements ActionListener{
         winnerLabel.setVisible(true);
     }
     
-    private void setButton(JButton button, String piece){
+    public void setButtonPiece(JButton button, String piece){
         if (piece != ""){
             button.setText(piece);
             button.setFont(new Font("Arial", Font.PLAIN, 120));
         }
     }
 
-    private void restartGame(){
+    private void resetBoard(){
         Timer timer = new Timer(2000, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 winnerLabel.setVisible(false);
                 for(JButton button : buttonList){
                     button.setText("");
                 }
-                c.restartGame();
             }
         });
         timer.setRepeats(false);
         timer.start();           
     }
 
-    private void winnerHandler(){
-        String winner = c.getWinner();
+    public void winnerHandler(String winner){
         displayWinner(winner);
-        restartGame();     
+        resetBoard();     
     }
 
-    private void drawHandler(){
+    public void drawHandler(){
         displayDraw();
-        restartGame();
+        resetBoard();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        for(int i = 0; i < buttonList.size(); i++){
-            JButton buttonSource = (JButton) e.getSource();
-            JButton button = buttonList.get(i);
-            String piece = c.buttonPressed(buttonSource, button);
-            setButton(button, piece);
-            if(c.checkWin(buttonList)){
-                winnerHandler();
-            };
-            if(c.checkDraw(buttonList) && !c.isWinner()){
-                drawHandler();
-            }
-        }
+    public ArrayList<JButton> getButtonList() {
+        return buttonList;
     }
+
 }
  

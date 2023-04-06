@@ -1,8 +1,11 @@
-package Logic;
+package logic;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 public class Game{
     private Player player1 = new Player("Player1");  
@@ -29,12 +32,9 @@ public class Game{
         currentPlayer = playerList[randomPlayer];
         playerList[(randomPlayer + 1) % 2].setPiece("O");
         playerList[(randomPlayer + 1) % 2].setTurn(false);
-        System.out.println("Player1: " + player1.getPiece());
-        System.out.println("Player2: " + player2.getPiece());
-        System.out.println("Turn: " + currentPlayer.getName());
     }
 
-    public String buttonPressed(JButton buttonSource, JButton button){
+    public String getPiecePressed(JButton buttonSource, JButton button){
         if(!winner){
         Player player1 = playerList[0];
         Player player2 = playerList[1];
@@ -43,12 +43,14 @@ public class Game{
                         player1.setTurn(false);
                         player2.setTurn(true);
                         currentPlayer = player2;
+                        System.out.println("Current Turn:" + player2.getName());
                         return player1.getPiece();
                     }
                     if (player2.isTurn() && button.getText() == "") {
                         player1.setTurn(true);
                         player2.setTurn(false);
                         currentPlayer = player1;
+                        System.out.println("Current Turn:" + player1.getName());
                         return player2.getPiece();
                     }
                 }
@@ -113,23 +115,29 @@ public class Game{
             }
             winner = true;
         }
-     
     };
 
-    public void checkDraw(ArrayList<JButton> buttonList){
+    public boolean checkDraw(ArrayList<JButton> buttonList){
         draw = true;
         for(JButton button : buttonList){
             if(button.getText() == ""){
                 draw = false;
             }
         }
+        return draw;
     }
     
     public void restartGame(){
-        winner = false;
-        player1.setWinner(false);
-        player1.setWinner(false);
-        generateRandomPieceandTurn(playerList);
+        Timer timer = new Timer(2000, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                winner = false;
+                player1.setWinner(false);
+                player1.setWinner(false);
+                generateRandomPieceandTurn(playerList);            }
+        });
+        timer.setRepeats(false);
+        timer.start();           
+        
     }
 
     public String getWinner(){
