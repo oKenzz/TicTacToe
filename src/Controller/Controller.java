@@ -13,12 +13,12 @@ public class Controller {
         logic = new Game();
     }
 
-    public String buttonPressed(JButton button_source, JButton button){
-        return logic.buttonPressed(button_source, button);
+    public String buttonPressed(JButton buttonSource, JButton button){
+        return logic.buttonPressed(buttonSource, button);
     }
 
-    public boolean check_win(ArrayList<JButton> button_list){
-        return logic.check_win(button_list);
+    public boolean checkWin(ArrayList<JButton> buttonList){
+        return logic.checkWin(buttonList);
     }
 
     public void restartGame(){
@@ -33,8 +33,8 @@ public class Controller {
         return logic.isWinner();
     }
 
-    public boolean check_draw(ArrayList<JButton> button_list){
-        logic.checkDraw(button_list);
+    public boolean checkDraw(ArrayList<JButton> buttonList){
+        logic.checkDraw(buttonList);
         return logic.isDraw();
     }
 }

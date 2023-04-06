@@ -17,7 +17,7 @@ public class BoardFrame extends JFrame implements ActionListener{
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
-    private ArrayList<JButton> button_list = new ArrayList<JButton>();
+    private ArrayList<JButton> buttonList = new ArrayList<JButton>();
     private Controller c = new Controller();
     JLabel winnerLabel = new JLabel();
 
@@ -36,7 +36,7 @@ public class BoardFrame extends JFrame implements ActionListener{
     private void generatePlayarea(int size){
         for (int i = 0; i < Math.pow(size,2); i++) {
             JButton button = new JButton();
-            button_list.add(button);   
+            buttonList.add(button);   
             button.addActionListener(this);
             button.setFocusPainted(false);
             button.setBackground(Color.WHITE);
@@ -66,18 +66,18 @@ public class BoardFrame extends JFrame implements ActionListener{
         winnerLabel.setVisible(true);
     }
     
-    public void setButton(JButton button, String piece){
+    private void setButton(JButton button, String piece){
         if (piece != ""){
             button.setText(piece);
             button.setFont(new Font("Arial", Font.PLAIN, 120));
         }
     }
 
-    public void restartGame(){
+    private void restartGame(){
         Timer timer = new Timer(2000, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 winnerLabel.setVisible(false);
-                for(JButton button : button_list){
+                for(JButton button : buttonList){
                     button.setText("");
                 }
                 c.restartGame();
@@ -87,7 +87,7 @@ public class BoardFrame extends JFrame implements ActionListener{
         timer.start();           
     }
 
-    public void winnerHandler(){
+    private void winnerHandler(){
         String winner = c.getWinner();
         displayWinner(winner);
         restartGame();     
@@ -100,15 +100,15 @@ public class BoardFrame extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int i = 0; i < button_list.size(); i++){
-            JButton button_source = (JButton) e.getSource();
-            JButton button = button_list.get(i);
-            String piece = c.buttonPressed(button_source, button);
+        for(int i = 0; i < buttonList.size(); i++){
+            JButton buttonSource = (JButton) e.getSource();
+            JButton button = buttonList.get(i);
+            String piece = c.buttonPressed(buttonSource, button);
             setButton(button, piece);
-            if(c.check_win(button_list)){
+            if(c.checkWin(buttonList)){
                 winnerHandler();
             };
-            if(c.check_draw(button_list) && !c.isWinner()){
+            if(c.checkDraw(buttonList) && !c.isWinner()){
                 drawHandler();
             }
         }

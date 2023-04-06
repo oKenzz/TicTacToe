@@ -7,37 +7,38 @@ import javax.swing.JButton;
 public class Game{
     private Player player1 = new Player("Player1");  
     private Player player2 = new Player("Player2");
-    private Player[] player_list = {player1, player2};
+    //TODO: remove playerList, really only for randomizing, use better randomizing algoritm
+    private Player[] playerList = {player1, player2};
     private Player currentPlayer;
     private boolean winner = false;
     private boolean draw = false;
 
     public Game(){
-        generateRandomPieceandTurn(player_list);
+        generateRandomPieceandTurn(playerList);
         System.out.println("Player1: " + player1.getPiece());
         System.out.println("Player2: " + player2.getPiece());
         System.out.println("Turn: " + currentPlayer.getName());
     }
 
-    public void generateRandomPieceandTurn(Player[] player_list){
+    private void generateRandomPieceandTurn(Player[] playerList){
         Random random = new Random();
         int randomPlayer = random.nextInt(2);
         //TODO: randomize pieces
-        player_list[randomPlayer].setPiece("X");
-        player_list[randomPlayer].setTurn(true);
-        currentPlayer = player_list[randomPlayer];
-        player_list[(randomPlayer + 1) % 2].setPiece("O");
-        player_list[(randomPlayer + 1) % 2].setTurn(false);
+        playerList[randomPlayer].setPiece("X");
+        playerList[randomPlayer].setTurn(true);
+        currentPlayer = playerList[randomPlayer];
+        playerList[(randomPlayer + 1) % 2].setPiece("O");
+        playerList[(randomPlayer + 1) % 2].setTurn(false);
         System.out.println("Player1: " + player1.getPiece());
         System.out.println("Player2: " + player2.getPiece());
         System.out.println("Turn: " + currentPlayer.getName());
     }
 
-    public String buttonPressed(JButton button_source, JButton button){
+    public String buttonPressed(JButton buttonSource, JButton button){
         if(!winner){
-        Player player1 = player_list[0];
-        Player player2 = player_list[1];
-                if(button_source == button){
+        Player player1 = playerList[0];
+        Player player2 = playerList[1];
+                if(buttonSource == button){
                     if(player1.isTurn() && button.getText() == ""){
                         player1.setTurn(false);
                         player2.setTurn(true);
@@ -55,42 +56,42 @@ public class Game{
         return "";
     }
 
-    public boolean check_win(ArrayList<JButton> button_list){
+    public boolean checkWin(ArrayList<JButton> buttonList){
         if(!winner){
-            checkHorizontal(button_list);
-            checkVertical(button_list);
-            checkDiagonal(button_list);
+            checkHorizontal(buttonList);
+            checkVertical(buttonList);
+            checkDiagonal(buttonList);
             return winner;
         }
         return false;
     }
 
-    private void checkHorizontal(ArrayList<JButton> button_list){
+    private void checkHorizontal(ArrayList<JButton> buttonList){
         for (int i = 0; i < 9; i+=3){
-            JButton button1 = button_list.get(i);
-            JButton button2 = button_list.get(i+1);
-            JButton button3 = button_list.get(i+2);
+            JButton button1 = buttonList.get(i);
+            JButton button2 = buttonList.get(i+1);
+            JButton button3 = buttonList.get(i+2);
             checkWinner(button1, button2, button3);
         }
     };
     
-    private void checkVertical(ArrayList<JButton> button_list){
+    private void checkVertical(ArrayList<JButton> buttonList){
         for (int i = 0; i < 3; i++){
-            JButton button1 = button_list.get(i);
-            JButton button2 = button_list.get(i+3);
-            JButton button3 = button_list.get(i+6);
+            JButton button1 = buttonList.get(i);
+            JButton button2 = buttonList.get(i+3);
+            JButton button3 = buttonList.get(i+6);
             checkWinner(button1, button2, button3);
         }
     };
 
-    private void checkDiagonal(ArrayList<JButton> button_list){
-            JButton button1 = button_list.get(0);
-            JButton button2 = button_list.get(4);
-            JButton button3 = button_list.get(8);
+    private void checkDiagonal(ArrayList<JButton> buttonList){
+            JButton button1 = buttonList.get(0);
+            JButton button2 = buttonList.get(4);
+            JButton button3 = buttonList.get(8);
             checkWinner(button1, button2, button3);
-            button1 = button_list.get(2);
-            button2 = button_list.get(4);
-            button3 = button_list.get(6);
+            button1 = buttonList.get(2);
+            button2 = buttonList.get(4);
+            button3 = buttonList.get(6);
             checkWinner(button1, button2, button3);
         };
 
@@ -115,13 +116,20 @@ public class Game{
      
     };
 
-    public void checkDraw(ArrayList<JButton> button_list){
+    public void checkDraw(ArrayList<JButton> buttonList){
         draw = true;
-        for(JButton button : button_list){
+        for(JButton button : buttonList){
             if(button.getText() == ""){
                 draw = false;
             }
         }
+    }
+    
+    public void restartGame(){
+        winner = false;
+        player1.setWinner(false);
+        player1.setWinner(false);
+        generateRandomPieceandTurn(playerList);
     }
 
     public String getWinner(){
@@ -140,12 +148,5 @@ public class Game{
 
     public boolean isWinner(){
         return winner;
-    }
-
-    public void restartGame(){
-        winner = false;
-        player1.setWinner(false);
-        player1.setWinner(false);
-        generateRandomPieceandTurn(player_list);
     }
 }
