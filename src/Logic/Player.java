@@ -6,7 +6,6 @@ public class Player {
     private boolean winner;
     private String name;
 
-
     public Player(String name){
         this.turn = false;
         this.piece = "";
@@ -40,8 +39,5 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    
-    
+    }    
 }

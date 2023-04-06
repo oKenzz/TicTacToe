@@ -4,14 +4,13 @@ import java.util.Random;
 
 import javax.swing.JButton;
 
-
 public class Game{
     private Player player1 = new Player("Player1");  
     private Player player2 = new Player("Player2");
     private Player[] player_list = {player1, player2};
     private Player currentPlayer;
     private boolean winner = false;
-
+    private boolean draw = false;
 
     public Game(){
         generateRandomPieceandTurn(player_list);
@@ -29,6 +28,9 @@ public class Game{
         currentPlayer = player_list[randomPlayer];
         player_list[(randomPlayer + 1) % 2].setPiece("O");
         player_list[(randomPlayer + 1) % 2].setTurn(false);
+        System.out.println("Player1: " + player1.getPiece());
+        System.out.println("Player2: " + player2.getPiece());
+        System.out.println("Turn: " + currentPlayer.getName());
     }
 
     public String buttonPressed(JButton button_source, JButton button){
@@ -53,19 +55,14 @@ public class Game{
         return "";
     }
 
-    public void check_win(ArrayList<JButton> button_list){
-        if (!winner){
+    public boolean check_win(ArrayList<JButton> button_list){
+        if(!winner){
             checkHorizontal(button_list);
             checkVertical(button_list);
             checkDiagonal(button_list);
-            if(winner){
-                if (player1.isWinner()){
-                    System.out.println("Winner: Player1");
-                } else {
-                    System.out.println("Winner: Player2");
-                }
-            }
+            return winner;
         }
+        return false;
     }
 
     private void checkHorizontal(ArrayList<JButton> button_list){
@@ -117,4 +114,38 @@ public class Game{
         }
      
     };
+
+    public void checkDraw(ArrayList<JButton> button_list){
+        draw = true;
+        for(JButton button : button_list){
+            if(button.getText() == ""){
+                draw = false;
+            }
+        }
+    }
+
+    public String getWinner(){
+        if(winner && player1.isWinner()){
+            return player1.getName();
+        }
+        if(winner && player2.isWinner()){
+            return player2.getName();
+        }
+        return "";
+    }
+
+    public boolean isDraw(){
+        return draw;
+    }
+
+    public boolean isWinner(){
+        return winner;
+    }
+
+    public void restartGame(){
+        winner = false;
+        player1.setWinner(false);
+        player1.setWinner(false);
+        generateRandomPieceandTurn(player_list);
+    }
 }
