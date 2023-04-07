@@ -8,30 +8,29 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 
 public class Game{
-    private Player player1 = new Player("Player1");  
-    private Player player2 = new Player("Player2");
-    //TODO: remove playerList, really only for randomizing, use better randomizing algoritm
-    private Player[] playerList = {player1, player2};
+    private String[] pieces = {"X", "O"};
+    private Player player1;
+    private Player player2;
     private Player currentPlayer;
+    Player[] playerList = new Player[2];
     private boolean winner = false;
     private boolean draw = false;
 
-    public Game(){
+    public Game(String player1Name, String player2Name){
+        player1 = new Player(player1Name); 
+        player2 = new Player(player2Name);
+        playerList[0] = player1;
+        playerList[1] = player2;
         generateRandomPieceandTurn(playerList);
-        System.out.println("Player1: " + player1.getPiece());
-        System.out.println("Player2: " + player2.getPiece());
-        System.out.println("Turn: " + currentPlayer.getName());
     }
 
     private void generateRandomPieceandTurn(Player[] playerList){
         Random random = new Random();
         int randomPlayer = random.nextInt(2);
-        //TODO: randomize pieces
-        playerList[randomPlayer].setPiece("X");
-        playerList[randomPlayer].setTurn(true);
+        int randomPiece = random.nextInt(2);
+        playerList[randomPlayer].setPiece(pieces[randomPiece]);
         currentPlayer = playerList[randomPlayer];
-        playerList[(randomPlayer + 1) % 2].setPiece("O");
-        playerList[(randomPlayer + 1) % 2].setTurn(false);
+        playerList[(randomPlayer + 1) % 2].setPiece(pieces[(randomPiece + 1) % 2]);
     }
 
     public String getPiecePressed(JButton buttonSource, JButton button){
@@ -39,16 +38,12 @@ public class Game{
         Player player1 = playerList[0];
         Player player2 = playerList[1];
                 if(buttonSource == button){
-                    if(player1.isTurn() && button.getText() == ""){
-                        player1.setTurn(false);
-                        player2.setTurn(true);
+                    if(currentPlayer == player1 && button.getText() == ""){;
                         currentPlayer = player2;
                         System.out.println("Current Turn:" + player2.getName());
                         return player1.getPiece();
                     }
-                    if (player2.isTurn() && button.getText() == "") {
-                        player1.setTurn(true);
-                        player2.setTurn(false);
+                    if (currentPlayer == player2 && button.getText() == "") {
                         currentPlayer = player1;
                         System.out.println("Current Turn:" + player1.getName());
                         return player2.getPiece();
@@ -133,7 +128,11 @@ public class Game{
                 winner = false;
                 player1.setWinner(false);
                 player1.setWinner(false);
-                generateRandomPieceandTurn(playerList);            }
+                Random random = new Random();
+                int randomPlayer = random.nextInt(2);
+                System.out.println(randomPlayer);
+                currentPlayer = playerList[randomPlayer];
+            }
         });
         timer.setRepeats(false);
         timer.start();           
@@ -157,4 +156,14 @@ public class Game{
     public boolean isWinner(){
         return winner;
     }
+
+    public Player[] getPlayerList() {
+        return playerList;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    
 }

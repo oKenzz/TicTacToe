@@ -1,25 +1,15 @@
 package logic;
 public class Player {
     
-    private boolean turn;
     private String piece;
     private boolean winner;
     private String name;
 
     public Player(String name){
-        this.turn = false;
         this.piece = "";
         this.winner = false;
         this.name = name;
     };
-  
-    public boolean isTurn() {
-        return turn;
-    }
-
-    public void setTurn(boolean turn) {
-        this.turn = turn;
-    }
 
     public String getPiece() {
         return piece;
