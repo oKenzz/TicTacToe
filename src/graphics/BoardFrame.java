@@ -1,15 +1,13 @@
 package graphics;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 
 import logic.Player;
 
@@ -22,9 +20,7 @@ public class BoardFrame extends JFrame{
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
-    private ArrayList<JButton> buttonList = new ArrayList<JButton>();
     JLabel winnerLabel = new JLabel();
-    JPanel playArea = new JPanel();
     JPanel infoPanel = new JPanel();
     JPanel player1Panel = new JPanel();
     JPanel player2Panel = new JPanel();
@@ -38,12 +34,12 @@ public class BoardFrame extends JFrame{
 
     public BoardFrame(Player player1, Player player2, String currentPlayer){
         setTitle("Tic Tac Toe");
+        setIconImage(new ImageIcon("tictactoeIcon.png").getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setLayout(new BorderLayout());
         generateInfoPanel(player1, player2);
         generateCurrentTurnPanel(currentPlayer);
-        generatePlayarea(3);
         createWinnerLabel();  
         pack();
         setLocationRelativeTo(null);
@@ -102,18 +98,6 @@ public class BoardFrame extends JFrame{
         player2Panel.add(player2Name);
     }
 
-    private void generatePlayarea(int size){
-        playArea.setLayout(new GridLayout(3,3));
-        for (int i = 0; i < Math.pow(size,2); i++) {
-            JButton button = new JButton();
-            buttonList.add(button);   
-            button.setFocusPainted(false);
-            button.setBackground(Color.WHITE);
-            playArea.add(button);
-        }
-        add(playArea, BorderLayout.CENTER);
-    }
-
     private void createWinnerLabel(){
         winnerLabel.setHorizontalAlignment(JLabel.CENTER);
         winnerLabel.setVerticalAlignment(JLabel.CENTER);
@@ -122,18 +106,33 @@ public class BoardFrame extends JFrame{
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 60));
         winnerLabel.setForeground(Color.RED);
         JLayeredPane layeredPane = getLayeredPane();
+        //TODO: fix alignment when JFrame is resized
         layeredPane.add(winnerLabel, JLayeredPane.POPUP_LAYER);
         winnerLabel.setBounds(0, 0, WIDTH, HEIGHT);
     }
 
-    private void displayWinner(String winner){
+    public void displayWinner(String winner){
         winnerLabel.setText(winner + " wins!");
         winnerLabel.setVisible(true);
+        Timer timer = new Timer(2000, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                winnerLabel.setVisible(false);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();  
     }
 
-    private void displayDraw(){
+    public void displayDraw(){
         winnerLabel.setText("Draw");
         winnerLabel.setVisible(true);
+        Timer timer = new Timer(2000, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                winnerLabel.setVisible(false);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();  
     }
     
     public void setButtonPiece(JButton button, String piece){
@@ -148,38 +147,8 @@ public class BoardFrame extends JFrame{
         }
     }
 
-    private void resetBoard(){
-        Timer timer = new Timer(2000, new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                winnerLabel.setVisible(false);
-                for(JButton button : buttonList){
-                    button.setText("");
-                }
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();           
-    }
-
-    public void winnerHandler(String winner){
-        displayWinner(winner);
-        resetBoard();     
-    }
-
-    public void drawHandler(){
-        displayDraw();
-        resetBoard();
-    }
-
     public void setCurrentPlayer(String player){
         currentPlayer.setText(player);
     }
-
-    public ArrayList<JButton> getButtonList() {
-        return buttonList;
-    }
-
-
-
 }
  

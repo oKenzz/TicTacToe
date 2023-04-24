@@ -40,12 +40,10 @@ public class Game{
                 if(buttonSource == button){
                     if(currentPlayer == player1 && button.getText() == ""){;
                         currentPlayer = player2;
-                        System.out.println("Current Turn:" + player2.getName());
                         return player1.getPiece();
                     }
                     if (currentPlayer == player2 && button.getText() == "") {
                         currentPlayer = player1;
-                        System.out.println("Current Turn:" + player1.getName());
                         return player2.getPiece();
                     }
                 }
@@ -130,7 +128,6 @@ public class Game{
                 player1.setWinner(false);
                 Random random = new Random();
                 int randomPlayer = random.nextInt(2);
-                System.out.println(randomPlayer);
                 currentPlayer = playerList[randomPlayer];
             }
         });
